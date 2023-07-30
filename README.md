@@ -1,8 +1,7 @@
 <br/><br/> 
 # Reading Dart documentation
-<br/><br/> 
+<br/>
 
----
 
 ### Contetents
 
@@ -15,7 +14,6 @@
 
 ### 01. Variables
 
-<br/>
 
 #### Null safety
 - Varibale stores reference
