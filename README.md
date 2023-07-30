@@ -56,7 +56,6 @@ if (weLikeToCount) {
 print(lineCount);
 ~~~
 - You don’t have to initialize a local variable where it’s declared, but you do need to assign it a value before it’s used.
-
 <br/><br/>
 
 #### Late variables 
