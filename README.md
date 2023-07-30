@@ -1,9 +1,6 @@
 <br/><br/> 
 
 ![header](https://capsule-render.vercel.app/api?type=waving&color=timeGradient&height=300&section=header&fontSize=35&text=Reading%20Dart%20Documentation&animation=fadeIn&fontAlignY=42&fontAlign=33)
-# 
-<br/>Reading Dart documentation
-
 
 ### Contetents
 
@@ -15,7 +12,7 @@
 <br/>
 
 ### 01. Variables 
-<br/>
+
 
 ```
 String name = 'Bob';
@@ -26,7 +23,6 @@ Object name = 'Bob';
 <br/><br/>
 
 #### Null safety
-<br/>
 
 ```
 String? name
