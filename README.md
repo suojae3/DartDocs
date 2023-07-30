@@ -11,17 +11,29 @@
 - [03. Comments ](#03-Comments)<br/>
 
 ---
-<br/><br/> 
+<br/>
 
 ### 01. Variables
 
-<br/><br/> 
+<br/>
 
-- Null safety
-- Degault value
-- Late variables 
-- Final and const
+#### Null safety
+- Varibale stores reference
+-  
 
+#### Default value 
+
+#### Late variables 
+ 
+#### Final and const
+
+<br/> 
+
+---
+
+### 02. Variables
+
+### 03. Variables
 
 
 
