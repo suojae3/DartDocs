@@ -1,6 +1,8 @@
 <br/><br/> 
-# Reading Dart documentation
-<br/>
+
+![header](https://capsule-render.vercel.app/api?type=waving&color=timeGradient&height=300&section=header&fontSize=35&text=Reading%20Dart%20Documentation&animation=fadeIn&fontAlignY=42&fontAlign=33)
+# 
+<br/>Reading Dart documentation
 
 
 ### Contetents
@@ -12,11 +14,27 @@
 ---
 <br/>
 
-### 01. Variables
+### 01. Variables 
+<br/>
 
+```
+String name = 'Bob';
+Object name = 'Bob';
+```
+- Varibale stores reference
+- If an object isn’t restricted to a single type, specify the Object type
+<br/><br/>
 
 #### Null safety
-- Varibale stores reference
+<br/>
+
+```
+String? name
+String? name
+```
+
+
+- 
 -  
 
 #### Default value 
