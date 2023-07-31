@@ -10,7 +10,7 @@
 
 ---
 <br/>
-#
+
 ### 01. Variables 
 
 
@@ -57,6 +57,7 @@ print(lineCount);
 ~~~
 - You don’t have to initialize a local variable where it’s declared, but you do need to assign it a value before it’s used.
 <br/>
+
 #
 
 #### Late variables 
@@ -80,8 +81,21 @@ late String temperature = readThermometer(); // Lazily initialized.
 1. The variable might not be needed, and initializing it is **costly**.
 2. You’re initializing an instance variable, and its initializer needs access to this.
 <br/>
+
 # 
+
 #### Final and const
+
+~~~
+final name = 'Bob'; // Without a type annotation
+final String nickname = 'Bobby';
+~~~
+~~~
+ // Error: a final variable can only be set once.
+name = 'Alice';
+~~~
+
+
 
 
 
