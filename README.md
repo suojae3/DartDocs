@@ -5,7 +5,7 @@
 ### Contetents
 
 - [01. Varibales ](#01-Variables)<br/>
-- [02. Operators ](#0-Operators)<br/>
+- [02. Operators ](#02-Operators)<br/>
 - [03. Comments ](#03-Comments)<br/>
 
 ---
@@ -21,8 +21,10 @@ Object name = 'Bob';
 ```
 - Varibale stores reference
 - If an object isn’t restricted to a single type, specify the Object type
-<br/><br/>
+<br/>
+
 #
+
 #### Null safety
 
 ```
@@ -139,42 +141,143 @@ if (n % i == 0 && d % i == 0) ...
 ```
 - In the operator table, each operator has **higher precedence** than the operators in the rows that follow it.
 
+
 #
 
 #### Arithmetic operators
 
+```
+int a;
+int b;
 
+a = 0;
+b = ++a; // Increment a before b gets its value.
+assert(a == b); // 1 == 1
 
+a = 0;
+b = a++; // Increment a after b gets its value.
+assert(a != b); // 1 != 0
 
+a = 0;
+b = --a; // Decrement a before b gets its value.
+assert(a == b); // -1 == -1
+
+a = 0;
+b = a--; // Decrement a after b gets its value.
+assert(a != b); // -1 != 0
+```
+- Dart also supports both prefix and postfix increment and decrement operators.
+
+<br/>
+
+```
+assert(5 / 2 == 2.5); // Result is a double
+assert(5 ~/ 2 == 2); // Result is an int
+```
+- **~/**:	Divide, returning an integer result
 
 #
 
 #### Equality and relational operators
+
+- If x or y is null, return true if both are null, and false if only one is null.
+
 
 #
 
 
 #### Type test operators
 
+```
+(employee as Person).firstName = 'Bob';
+```
+```
+if (employee is Person) {
+  // Type check
+  employee.firstName = 'Bob';
+}
+```
+- **as**: Typecast
+- **is**:True if the object has the specified type
+- **is!**: True if the object doesn’t have the specified type
+  
 #
 
 #### Assignment operators
+
+~~~
+a *= 3; // Assign and multiply: a = a * 3
+
+// Assign value to b if b is null; otherwise, b stays the same
+b ??= value;
+~~~
 
 #
 
 #### Logical operators
 
+~~~
+if (!done && (col == 0 || col == 3)) {
+  // ...Do something...
+}
+~~~
+
 #
 
 #### Bitwise and shift operators
+
+~~~
+final value = 0x22;
+final bitmask = 0x0f;
+
+assert((value << 4) == 0x220); // Shift left
+assert((value >> 4) == 0x02); // Shift right
+~~~
+- the bitwise shift operators (<< and >>) are being used to create new values based on **shifting the bits of the original value**. 
+- These operations don't change the original value itself but rather produce new values
+- value << 4: This shifts the bits of value 4 places to the left, effectively multiplying value by 
+2
+4
+2 
+4
+ . Since value is 0x22, the result of this operation is 0x220.
+ - value >> 4: This shifts the bits of value 4 places to the right, effectively dividing value by 
+2
+4
+2 
+4
+ . Since value is 0x22, the result of this operation is 0x02
 
 #
 
 #### Conditional expressions
 
+~~~
+var visibility = isPublic ? 'public' : 'private';
+String playerName(String? name) => name ?? 'Guest';
+~~~
+~~~
+// Slightly longer version uses ?: operator.
+String playerName(String? name) => name != null ? name : 'Guest';
+
+// Very long version uses if-else statement.
+String playerName(String? name) {
+  if (name != null) {
+    return name;
+  } else {
+    return 'Guest';
+  }
+}
+~~~
+- If the boolean expression tests for null, consider using ??.
+
 #
 
 #### Cascade notation
+
+
+
+
 
 #
 
