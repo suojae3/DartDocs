@@ -57,18 +57,36 @@ print(lineCount);
 ~~~
 - You don’t have to initialize a local variable where it’s declared, but you do need to assign it a value before it’s used.
 <br/><br/>
+#
 
 #### Late variables 
 
 ~~~
+late String description;
 
-
+void main() {
+  description = 'Feijoada!';
+  print(description);
+}
 ~~~
-
-
+~~~
+// This is the program's only call to readThermometer().
+late String temperature = readThermometer(); // Lazily initialized.
+~~~
+-  The late modifier has two use cases:
+1. Declaring a non-nullable variable that’s initialized after its declaration.
+2. Lazily initializing a variable.
+- This lazy initialization is handy in a couple of cases:
+1. The variable might not be needed, and initializing it is **costly**.
+2. You’re initializing an instance variable, and its initializer needs access to this.
 <br/><br/>
- 
+# 
 #### Final and const
+
+
+
+
+
 
 <br/><br/>
 
