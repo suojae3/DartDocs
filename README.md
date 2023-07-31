@@ -10,7 +10,7 @@
 
 ---
 <br/>
-
+#
 ### 01. Variables 
 
 
@@ -22,7 +22,7 @@ Object name = 'Bob';
 - Varibale stores reference
 - If an object isn’t restricted to a single type, specify the Object type
 <br/><br/>
-
+#
 #### Null safety
 
 ```
@@ -33,8 +33,8 @@ String? name
 - Nullable variables default to null, so they are initialized by default. 
 - Dart doesn’t set initial values to non-nullable types. 
 - You can’t access properties or call methods on an expression with a nullable type.
-<br/><br/>
-
+<br/>
+#
 #### Default value 
 ```
 int? lineCount;
@@ -56,7 +56,7 @@ if (weLikeToCount) {
 print(lineCount);
 ~~~
 - You don’t have to initialize a local variable where it’s declared, but you do need to assign it a value before it’s used.
-<br/><br/>
+<br/>
 #
 
 #### Late variables 
@@ -79,7 +79,7 @@ late String temperature = readThermometer(); // Lazily initialized.
 - This lazy initialization is handy in a couple of cases:
 1. The variable might not be needed, and initializing it is **costly**.
 2. You’re initializing an instance variable, and its initializer needs access to this.
-<br/><br/>
+<br/>
 # 
 #### Final and const
 
