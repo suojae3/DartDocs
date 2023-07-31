@@ -4,9 +4,12 @@
 
 ### Contetents
 
-- [01. Varibales ](#01-Variables)<br/>
-- [02. Operators ](#02-Operators)<br/>
-- [03. Comments ](#03-Comments)<br/>
+- [01. Varibales ](#01-variables)<br/>
+- [02. Operators ](#02-operators)<br/>
+- [03. Metadata ](#03-metadata)<br/>
+- [04. Libraries ](#03-libraries)<br/>
+
+
 
 ---
 <br/>
@@ -281,19 +284,72 @@ var paint = Paint()
   ..strokeCap = StrokeCap.round
   ..strokeWidth = 5.0;
 ~~~
+~~~Dart
+var paint = Paint();
+paint.color = Colors.black;
+paint.strokeCap = StrokeCap.round;
+paint.strokeWidth = 5.0;
+~~~
 - Cascades (.., ?..) allow you to make a sequence of operations on the same object. 
 
+<br/>
 
+~~~dart
+querySelector('#confirm') // Get an object.
+  ?..text = 'Confirm' // Use its members.
+  ..classes.add('important')
+  ..onClick.listen((e) => window.alert('Confirmed!'))
+  ..scrollIntoView();
+~~~
+~~~dart
+var button = querySelector('#confirm');
+button?.text = 'Confirm';
+button?.classes.add('important');
+button?.onClick.listen((e) => window.alert('Confirmed!'));
+button?.scrollIntoView();
+~~~
+- If the object that the cascade operates on can be null, then use a null-shorting cascade (?..) for the first operation.
 
-
+<br/>
 
 #
 
 #### Other operators
 
+- **?[]**: example: fooList?[1] passes the int 1 to fooList to access the element at index 1 unless fooList is null 
+- **?.**: example: foo?.bar selects property bar from expression foo unless foo is null.
+
 #
 
-### 03. Comments
+<br/>
+
+
+#### 03. Metadata
+
+~~~Dart
+class Television {
+  /// Use [turnOn] to turn the power on instead.
+  @Deprecated('Use turnOn instead')
+  void activate() {
+    turnOn();
+  }
+
+  /// Turns the TV's power on.
+  void turnOn() {...}
+  // ···
+}
+~~~
+- A metadata annotation begins with the character **@**, followed by either a reference to a compile-time constant (such as deprecated) or a call to a constant constructor.
+- Three annotations are available to all Dart code: **@Deprecated**, **@deprecated**, and **@override**. 
+
+#
+
+<br/>
+
+#### 04. Libraries
+
+
+
 
 
 
