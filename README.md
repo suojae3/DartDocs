@@ -326,7 +326,7 @@ button?.scrollIntoView();
 
 #### 03. Metadata
 
-~~~Dart
+~~~dart
 class Television {
   /// Use [turnOn] to turn the power on instead.
   @Deprecated('Use turnOn instead')
@@ -342,11 +342,36 @@ class Television {
 - A metadata annotation begins with the character **@**, followed by either a reference to a compile-time constant (such as deprecated) or a call to a constant constructor.
 - Three annotations are available to all Dart code: **@Deprecated**, **@deprecated**, and **@override**. 
 
+<br/>
+
+~~~dart
+class Todo {
+  final String who;
+  final String what;
+
+  const Todo(this.who, this.what);
+}
+~~~
+~~~dart
+@Todo('Dash', 'Implement this function')
+void doSomething() {
+  print('Do something');
+}
+~~~
+- You can define your own metadata annotations.
+- Imagine you're a novelist working on several chapters of a book simultaneously. 
+- **Sticky Note Class**: Each sticky note is like a class that defines an annotation. The color and message on the note correspond to the properties of the class.
+- **Placing Sticky Notes**: When you place a sticky note on a page, it's like using an annotation in your code. The sticky note provides additional information about the page without changing its content.
+- **Reading Sticky Notes**: Later, an editor or assistant may go through the manuscript and perform specific actions based on the sticky notes (e.g., proofreading pages marked with yellow).
+
+
 #
 
 <br/>
 
 #### 04. Libraries
+
+
 
 
 
