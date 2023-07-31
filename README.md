@@ -15,7 +15,7 @@
 
 
 
-```
+```Dart
 String name = 'Bob';
 Object name = 'Bob';
 ```
@@ -27,7 +27,7 @@ Object name = 'Bob';
 
 #### Null safety
 
-```
+```Dart
 String? name
 String? name
 ```
@@ -40,7 +40,7 @@ String? name
 #
 
 #### Default value 
-```
+```Dart
 int? lineCount;
 int lineCount = 0;
 ```
@@ -48,7 +48,7 @@ int lineCount = 0;
 
 <br/>
 
-~~~
+~~~Dart
 int lineCount;
 
 if (weLikeToCount) {
@@ -66,7 +66,7 @@ print(lineCount);
 
 #### Late variables 
 
-~~~
+~~~Dart
 late String description;
 
 void main() {
@@ -74,7 +74,7 @@ void main() {
   print(description);
 }
 ~~~
-~~~
+~~~Dart
 // This is the program's only call to readThermometer().
 late String temperature = readThermometer(); // Lazily initialized.
 ~~~
@@ -90,11 +90,11 @@ late String temperature = readThermometer(); // Lazily initialized.
 
 #### Final and const
 
-~~~
+~~~Dart
 final name = 'Bob'; // Without a type annotation
 final String nickname = 'Bobby';
 ~~~
-~~~
+~~~Dart
 name = 'Alice';
  // Error: a final variable can only be set once.
 ~~~
@@ -102,12 +102,12 @@ name = 'Alice';
 
 <br/>
 
-~~~
+~~~Dart
 var foo = const [];
 final bar = const [];
 const baz = []; // Equivalent to `const []`
 ~~~
-~~~
+~~~Dart
 baz = [42];
 // Error: Constant variables can't be assigned a value.
 ~~~
@@ -116,7 +116,7 @@ baz = [42];
 
 <br/>
 
-~~~
+~~~Dart
 const Object i = 3; // Where i is a const Object with an int value...
 const list = [i as int]; // Use a typecast.
 const map = {if (i is int) i: 'int'}; // Use is and collection if.
@@ -132,7 +132,7 @@ const set = {if (list is List<int>) ...list}; // ...and a spread.
 
 #### Operator precedence example
 
-```
+```Dart
 // Parentheses improve readability.
 if ((n % i == 0) && (d % i == 0)) ...
 
@@ -146,7 +146,7 @@ if (n % i == 0 && d % i == 0) ...
 
 #### Arithmetic operators
 
-```
+```Dart
 int a;
 int b;
 
@@ -170,7 +170,7 @@ assert(a != b); // -1 != 0
 
 <br/>
 
-```
+```Dart
 assert(5 / 2 == 2.5); // Result is a double
 assert(5 ~/ 2 == 2); // Result is an int
 ```
@@ -188,10 +188,10 @@ assert(5 ~/ 2 == 2); // Result is an int
 
 #### Type test operators
 
-```
+```Dart
 (employee as Person).firstName = 'Bob';
 ```
-```
+```Dart
 if (employee is Person) {
   // Type check
   employee.firstName = 'Bob';
@@ -205,7 +205,7 @@ if (employee is Person) {
 
 #### Assignment operators
 
-~~~
+~~~Dart
 a *= 3; // Assign and multiply: a = a * 3
 
 // Assign value to b if b is null; otherwise, b stays the same
@@ -216,7 +216,7 @@ b ??= value;
 
 #### Logical operators
 
-~~~
+~~~Dart
 if (!done && (col == 0 || col == 3)) {
   // ...Do something...
 }
@@ -226,7 +226,7 @@ if (!done && (col == 0 || col == 3)) {
 
 #### Bitwise and shift operators
 
-~~~
+~~~Dart
 final value = 0x22;
 final bitmask = 0x0f;
 
@@ -252,11 +252,11 @@ assert((value >> 4) == 0x02); // Shift right
 
 #### Conditional expressions
 
-~~~
+~~~Dart
 var visibility = isPublic ? 'public' : 'private';
 String playerName(String? name) => name ?? 'Guest';
 ~~~
-~~~
+~~~Dart
 // Slightly longer version uses ?: operator.
 String playerName(String? name) => name != null ? name : 'Guest';
 
@@ -274,6 +274,14 @@ String playerName(String? name) {
 #
 
 #### Cascade notation
+
+~~~Dart
+var paint = Paint()
+  ..color = Colors.black
+  ..strokeCap = StrokeCap.round
+  ..strokeWidth = 5.0;
+~~~
+- Cascades (.., ?..) allow you to make a sequence of operations on the same object. 
 
 
 
