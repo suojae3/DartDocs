@@ -11,6 +11,7 @@
 - [05. Built-in types ](#05-built-in-types)<br/>
 - [06. Records ](#06-records)<br/>
 - [07. Collections](#07-collectinos)<br/>
+- [08. Operators](#08-operators)<br/>
 
 
 ---
@@ -591,9 +592,85 @@ final constantSet = const {
 };
 // constantSet.add('helium'); // This line will cause an error.
 ```
-- To create a set that’s a compile-time constant, add const before the set literal:
+- To create a set that’s a compile-time constant, add const before the set literal.
+
 
 <br/>
+
+
+~~~dart
+var gifts = {
+  // Key:    Value
+  'first': 'partridge',
+  'second': 'turtledoves',
+  'fifth': 'golden rings'
+};
+
+var nobleGases = {
+  2: 'helium',
+  10: 'neon',
+  18: 'argon',
+};
+~~~
+- In general, a map is an object that associates keys and values. Both keys and values can be any type of object. 
+
+<br/>
+
+```dart
+var gifts = {'first': 'partridge'};
+gifts['fourth'] = 'calling birds';
+assert(gifts.length == 2);
+```
+- Use .length to get the number of key-value pairs in the map
+
+<br/>
+
+```dart
+final constantMap = const {
+  2: 'helium',
+  10: 'neon',
+  18: 'argon',
+};
+
+// constantMap[2] = 'Helium'; // This line will cause an error.
+```
+- To create a map that’s a compile-time constant, add const before the map literal
+
+<br/>
+
+#
+
+### 08. Operators
+
+<br/>
+
+```dart
+var list = [1, 2, 3];
+var list2 = [0, ...list];
+assert(list2.length == 4);
+```
+- Dart supports the spread operator (...) and the null-aware spread operator (...?) in list, map, and set literals.
+
+<br/>
+
+```dart
+var list2 = [0, ...?list];
+assert(list2.length == 1);
+```
+- If the expression to the right of the spread operator might be null, you can avoid exceptions by using a null-aware spread operator (...?)
+
+<br/>
+
+
+
+
+
+
+
+
+
+
+
 
 
 
