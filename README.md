@@ -10,6 +10,7 @@
 - [04. Libraries ](#04-libraries)<br/>
 - [05. Built-in types ](#05-built-in-types)<br/>
 - [06. Records ](#06-records)<br/>
+- [07. Collections](#07-collectinos)<br/>
 
 
 ---
@@ -470,6 +471,8 @@ assert('Dart has $s, which is very handy.' ==
 
 <br/>
 
+#
+
 ### 06. Records
 
 <br/>
@@ -487,10 +490,110 @@ var record = ('first', a: 2, b: true, 'last');
 record = (a: 123, b: true);
 ```
 
+<br/>
+
+```dart
+(num, Object) pair = (42, 'a');
+
+var first = pair.$1; // Static type `num`, runtime type `int`.
+var second = pair.$2; // Static type `Object`, runtime type `String`.
+```
+- There is no type declaration for individual record types.
+- The type system is aware of each field’s type wherever it is accessed from the record
+
+<br/>
 
 
+```dart
+({int x, int y, int z}) point = (x: 1, y: 2, z: 3);
+({int r, int g, int b}) color = (r: 1, g: 2, b: 3);
 
+print(point == color); // Prints 'false'. Lint: Equals on unrelated types.
+```
+- Two records are equal if they have the same shape (set of fields), and their corresponding fields have the same values. 
+- Since named field order is not part of a record’s shape, the order of named fields does not affect equality.
 
+<br/>
+
+```dart
+// Returns multiple values in a record:
+(String, int) userInfo(Map<String, dynamic> json) {
+  return (json['name'] as String, json['age'] as int);
+}
+
+final json = <String, dynamic>{
+  'name': 'Dash',
+  'age': 10,
+  'color': 'blue',
+};
+
+// Destructures using a record pattern:
+var (name, age) = userInfo(json);
+
+/* Equivalent to:
+  var info = userInfo(json);
+  var name = info.$1;
+  var age  = info.$2;
+*/
+```
+- Records allow functions to return multiple values bundled together
+
+<br/>
+
+#
+
+### 07. Collections
+
+<br/>
+
+- Dart has built-in support for **list, set, and map** collections.
+
+<br/>
+
+```dart
+var list = [1, 2, 3];
+assert(list.length == 3);
+assert(list[1] == 2);
+
+list[1] = 1;
+assert(list[1] == 1);
+```
+
+- Perhaps the most common collection in nearly every programming language is the array, or ordered group of objects.
+- Lists use zero-based indexing, where 0 is the index of the first value and list.length - 1 is the index of the last value.
+
+<br/>
+
+```dart
+var halogens = {'fluorine', 'chlorine', 'bromine', 'iodine', 'astatine'};
+```
+- A set in Dart is an unordered collection of unique items
+
+<br/>
+
+``` Dart
+var names = <String>{};
+// Set<String> names = {}; // This works, too.
+// var names = {}; // Creates a map, not a set.
+```
+- The syntax for map literals is similar to that for set literals. Because map literals came first, {} defaults to the Map type.
+- If you forget the type annotation on {} or the variable it’s assigned to, then Dart creates an object of type **Map<dynamic, dynamic>**.
+
+<br/>
+
+```dart
+final constantSet = const {
+  'fluorine',
+  'chlorine',
+  'bromine',
+  'iodine',
+  'astatine',
+};
+// constantSet.add('helium'); // This line will cause an error.
+```
+- To create a set that’s a compile-time constant, add const before the set literal:
+
+<br/>
 
 
 
