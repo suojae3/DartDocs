@@ -369,7 +369,123 @@ void doSomething() {
 
 <br/>
 
-#### 04. Libraries
+### 04. Libraries
+
+<br/>
+
+#### Specifying a library prefix
+
+```dart
+import 'package:lib1/lib1.dart';
+import 'package:lib2/lib2.dart' as lib2;
+
+// Uses Element from lib1.
+Element element1 = Element();
+
+// Uses Element from lib2.
+lib2.Element element2 = lib2.Element();
+```
+- If you import two libraries that have conflicting identifiers, then you can specify a prefix for one or both libraries.
+
+<br/>
+
+
+```dart
+// Import only foo.
+import 'package:lib1/lib1.dart' show foo;
+
+// Import all names EXCEPT foo.
+import 'package:lib2/lib2.dart' hide foo;
+````
+- If you want to use only part of a library, you can selectively import the library.
+
+<br/>
+
+```dart
+//To lazily load a library, you must first import it using deferred as.
+import 'package:greetings/hello.dart' deferred as hello;
+
+//When you need the library, invoke loadLibrary() using the library’s identifier.
+Future<void> greet() async {
+  await hello.loadLibrary();
+  hello.printGreeting();
+}
+```
+- Dart implicitly inserts loadLibrary() into the namespace that you define using deferred as namespace. The loadLibrary() function returns a Future.
+- Laily loading a library's advantages are
+  1. To reduce a web app’s initial startup time.
+  2. To perform A/B testing—trying out alternative implementations of an algorithm, for example.
+  3. To load rarely used functionality, such as optional screens and dialogs.
+
+#
+
+<br/>
+
+### 05. Built-in types
+
+<br/>
+
+- **every variable in Dart refers to an object** — an instance of a class—you can usually use constructors to initialize variables.
+
+~~~dart
+// String -> int
+var one = int.parse('1');
+assert(one == 1);
+
+// String -> double
+var onePointOne = double.parse('1.1');
+assert(onePointOne == 1.1);
+
+// int -> String
+String oneAsString = 1.toString();
+assert(oneAsString == '1');
+
+// double -> String
+String piAsString = 3.14159.toStringAsFixed(2);
+assert(piAsString == '3.14');
+~~~
+
+- turn a string into a number, or vice versa:
+
+<br/>
+
+```dart
+assert((3 << 1) == 6); // 0011 << 1 == 0110
+assert((3 | 4) == 7); // 0011 | 0100 == 0111
+assert((3 & 4) == 0); // 0011 & 0100 == 0000
+```
+- The int type specifies the traditional bitwise shift (<<, >>, >>>), complement (~), AND (&), OR (|), and XOR (^) operators, which are useful for manipulating and masking flags in bit fields.
+
+<br/>
+
+```dart
+var s = 'string interpolation';
+
+assert('Dart has $s, which is very handy.' ==
+    'Dart has string interpolation, '
+        'which is very handy.');
+```
+- You can put the value of an expression inside a string by using ${expression}.
+
+<br/>
+
+### 06. Records
+
+<br/>
+
+- Records are an anonymous, immutable, aggregate type.
+- Unlike other collection types, records are fixed-sized, heterogeneous, and typed.
+
+```dart
+var record = ('first', a: 2, b: true, 'last');
+
+// Record type annotation in a variable declaration:
+({int a, bool b}) record;
+
+// Initialize it with a record expression:
+record = (a: 123, b: true);
+```
+
 
 
 
