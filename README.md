@@ -7,8 +7,9 @@
 - [01. Varibales ](#01-variables)<br/>
 - [02. Operators ](#02-operators)<br/>
 - [03. Metadata ](#03-metadata)<br/>
-- [04. Libraries ](#03-libraries)<br/>
-
+- [04. Libraries ](#04-libraries)<br/>
+- [05. Built-in types ](#05-built-in-types)<br/>
+- [06. Records ](#06-records)<br/>
 
 
 ---
