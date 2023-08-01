@@ -661,6 +661,25 @@ assert(list2.length == 1);
 
 <br/>
 
+```dart
+var nav = ['Home', 'Furniture', 'Plants', if (promoActive) 'Outlet'];
+```
+- Dart offers collection if and collection for for use in list, map, and set literals.
+
+<br/>
+
+```dart
+var listOfInts = [1, 2, 3];
+var listOfStrings = ['#0', for (var i in listOfInts) '#$i'];
+assert(listOfStrings[1] == '#1');
+```
+- using collection for to manipulate the items of a list before adding them to another list.
+
+<br/>
+
+#
+
+
 
 
 
