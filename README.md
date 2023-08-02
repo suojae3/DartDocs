@@ -25,8 +25,9 @@
 String name = 'Bob';
 Object name = 'Bob';
 ```
-- Varibale stores reference
-- If an object isn’t restricted to a single type, specify the Object type
+- Variables 은 주소(reference)를 저장한다
+- 만약 객체가 single type이 아니라면 일단 Object 타입으로 지정하는 것이 좋다
+
 <br/>
 
 #
@@ -34,13 +35,13 @@ Object name = 'Bob';
 #### Null safety
 
 ```Dart
-String? name
-String? name
+String? name // Nullable type. Can be `null` or string.
+String name // Non-nullable type. Cannot be `null` but can be string.
 ```
 
-- Nullable variables default to null, so they are initialized by default. 
-- Dart doesn’t set initial values to non-nullable types. 
-- You can’t access properties or call methods on an expression with a nullable type.
+- 변수를 사용하기 전에는 반드시 초기화(initialize)해야한다
+- Nullable variables의 디폴트 값은 null이기 때문에 이미 초기화가 되어있다고 할 수 있다
+- an expression with a nullable type 에 접근할 수 없다 -> Swift 처럼 optional(value)가 나오는 것이 아닌 그냥 접근이 안된다는 차이점
 <br/>
 
 #
@@ -65,7 +66,7 @@ if (weLikeToCount) {
 
 print(lineCount);
 ~~~
-- You don’t have to initialize a local variable where it’s declared, but you do need to assign it a value before it’s used.
+- Swift와 달리 직접 사용하기 전까지는 타입까지만 선언해도 괜찮다. 하지만 값을 할당하거나 사용하려면 반드시 그 전에 초기값을 넣어야한다. 
 <br/>
 
 #
@@ -679,6 +680,77 @@ assert(listOfStrings[1] == '#1');
 
 #
 
+### 09. Generics
+
+<br/>
+
+#### Why use generics?
+- 제너릭을 통해 type safety를 보장할 수 있다
+- 제너릭을 사용하면 코드 중복도를 낮출 수  있다
+
+<br/>
+
+```dart
+var names = <String>[];
+names.addAll(['Seth', 'Kathy', 'Lars']);
+names.add(42); // Error
+```
+- 위 코드를 볼 때 만약 String 배열로 선언된 배열에 이외 타입이 들어가면 바로 error가 뜬다.
+- 이러한 문제를 방지하기 위해 type safety를 부여하고 싶다면 generic을 사용한다
+
+<br/>
+
+```dart
+//a string-specific version 
+abstract class StringCache {
+  String getByKey(String key);
+  void setByKey(String key, String value);
+
+//Later, you decide you want a number-specific version of this interface… You get the idea.
+  abstract class Cache<T> {
+  T getByKey(String key);
+  void setByKey(String key, T value);
+}
+```
+- 제너릭은 코드 중복도를 낮춘다. 다양한 type으로 단일 인터페이스 및 구현물을 나눌 수 있다. -> 다형성의 장점 보유
+- 위 코드에서 보면 처음에는 String 타입으로 지정해서 class를 짯다가 이후에 아이디어가 떠올라 int값으로 바꿔야 하는 상황이 올 수 도 있다고 가정해보자
+- 만약 전자의 예시를 사용할경우 class를 다시 int 타입으로 써야하는 엄청난 비효율적인 코딩이 탄생한다
+- 이를 방지하기 위해 제너릭 코드를 사용한다 -> T는 place holder로 나중에 개발자가 정의하면 되는 부분
+
+<br/>
+
+#### Restricting the parameterized type
+
+- 아무리 제너릭으로 아무 타입이나 쓰게하더라도 특정 타입으로 제한시켜서 제너릭을 사용하고 싶을 때가 있다
+- 이렇 때는 extends 키워드를 사용해보자
+
+
+<br/>
+
+```dart
+class Foo<T extends Object> {
+  // Any type provided to Foo for T must be non-nullable.
+}
+```
+- 이 코드는 non-nullable한 타입으로 restrict한 경우이다(디폴트값은 Object?이다)
+
+<br/>
+
+```dart
+class Foo<T extends SomeBaseClass> {
+  // Implementation goes here...
+  String toString() => "Instance of 'Foo<$T>'";
+}
+
+class Extender extends SomeBaseClass {...}
+
+var foo = Foo<Object>(); //errror
+
+```
+- SomeBaseClass로 타입을 제한시킨 Foo클래스 
+- 만약 마지막코드처럼 SomeBaseClass의 범위를 넘어서는 타입이 오면 error가 뜬다
+
+<br/>
 
 
 
