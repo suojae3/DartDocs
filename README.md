@@ -863,7 +863,7 @@ void main() {
 
 #### Tips for passing static analysis
 
-&nbsp;&nbsp;&nbsp;&nbsp;<img src="pic1" width="400" height="200"><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<img src="pic1.tiff" width="400" height="200"><br/><br/>
 
 
 
