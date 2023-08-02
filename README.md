@@ -752,6 +752,68 @@ var foo = Foo<Object>(); //errror
 
 <br/>
 
+#### Using generic methods
+
+```dart
+T first<T>(List<T> ts) {
+  // Do some initial work or error checking, then...
+  T tmp = ts[0];
+  // Do some additional checking or processing...
+  return tmp;
+}
+```
+- first (<T>) 라고 작성하면 Typ argument 를 다양한 곳에 작성할 수 있다
+- 리턴타입에다 T를 넣을 수 있다
+- argument 타입으로 T를 넣을 수 있다 (List<T>).
+- local varialbe의 타입으로 넣을 수 있다 (T tmp).
+
+<br/>
+
+#
+
+### 10. Typedefs
+
+<br/>
+
+#### Typedefs 는 Swift의 Type alias와 유사하다
+
+<br/>
+
+``` dart
+typedef IntList = List<int>;
+IntList il = [1, 2, 3]
+```
+- 이미 있는 타입의 이름을 내가 쓰고싶은 이름으로 바꿔준다
+- 위 코드의 경우 List<int> 대신 IntList가 대신 사용된 것을 확인할 수 있다
+
+<br/>
+
+~~~dart
+typedef ListMapper<X> = Map<X, List<X>>;
+
+Map<String, List<String>> m1 = {}; // Verbose.
+ListMapper<String> m2 = {}; // Same thing but shorter and clearer.
+~~~
+- Typedef는 type 파라미터를 가질 수 있다
+- 위의 코드를 보면 똑같은 표현을 typedef를 통해 더 간결하게 표현 -> 타입파라미터가 중첩될 때 사용하면 좋다
+- 하지만 공식문서에서는 왠만하면 inline function types(기본 내재된 타입)을 사용하라고 권장하고 있다
+
+<br/>
+
+#
+
+### 11. The Dart type system
+
+<br>
+
+#### Dart 언어가 type safe 하기 때문에 얻는 장점
+
+- 
+
+
+
+
+
 
 
 
