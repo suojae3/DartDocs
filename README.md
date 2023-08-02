@@ -762,7 +762,7 @@ T first<T>(List<T> ts) {
   return tmp;
 }
 ```
-- first (<T>) 라고 작성하면 Typ argument 를 다양한 곳에 작성할 수 있다
+- `first (<T>)` 라고 작성하면 Type argument 를 다양한 곳에 작성할 수 있다
 - 리턴타입에다 T를 넣을 수 있다
 - argument 타입으로 T를 넣을 수 있다 (List<T>).
 - local varialbe의 타입으로 넣을 수 있다 (T tmp).
@@ -773,7 +773,6 @@ T first<T>(List<T> ts) {
 
 ### 10. Typedefs
 
-<br/>
 
 #### Typedefs 는 Swift의 Type alias와 유사하다
 
@@ -804,11 +803,67 @@ ListMapper<String> m2 = {}; // Same thing but shorter and clearer.
 
 ### 11. The Dart type system
 
-<br>
-
 #### Dart 언어가 type safe 하기 때문에 얻는 장점
 
-- 
+- static type checking 의 장점은 버그를 런타임이 아닌 컴파일 타임에서 잡을 수 있다는 것이다
+
+<br/>
+
+```dart
+void printInts(List<int> a) => print(a);
+
+void main() {
+  final list = [];
+  list.add(1);
+  list.add('2');
+  printInts(list);
+}
+//error - The argument type 'List<dynamic>' can't be assigned to the parameter type 'List<int>'. - argument_type_not_assignable
+
+```
+- `list`는 기본적으로 `List<dynamic>`이라는 static type을 지니고 있다
+- 따라서 위의 코드의 경우에는 파라미터로 `List<dynamic>`을 받아야하는데 타입추론에 의해 `List<int>`를 받음으로서 에러가 나는 것을 확인할 수 있다.
+
+<br/>
+
+```dart
+void printInts(List<int> a) => print(a);
+
+void main() {
+  final list = <int>[];
+  list.add(1);
+  list.add(2);
+  printInts(list);
+}
+```
+- 위 코드처럼 `List<int>`라는 타입을 맞춰주어야한다
+
+<br/>
+
+#### What is soundness?
+
+- Soundness 하다는 것은 너가 짠 코드에 invalid states가 없다는 것이다
+- 다시말해 코드에 타입들이 명확하게 제시되어 있는 것이다
+- Dart는 compile time 과 run time 에서 type 을 이중체크한다
+
+<br/>
+
+#### The benefits of soundness
+
+- soundness 할 때 장점은 다음과 같다
+1. 타입 관련 버그를 런 타임으로 넘어가기전 컴파일 타임에서 잡을 수 있다
+2. 코드의 가독성을 높일 수 있다.
+3. 코드가 유지보수하기 더 용이해진다 
+4. Ahead-of-Time(AOT)가 빨라진다<br/>
+💡AOT란?<br/>
+**Ahead-of-Time(AOT)**: 고수준언어(dart)에서 저수준언어(c++, 어셈블리...)로 바꾸는데 걸리는 시간 <br/>
+
+
+<br>
+
+#### Tips for passing static analysis
+
+&nbsp;&nbsp;&nbsp;&nbsp;<img src="pic1" width="400" height="200"><br/><br/>
 
 
 
