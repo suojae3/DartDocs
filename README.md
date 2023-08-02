@@ -863,7 +863,38 @@ void main() {
 
 #### Tips for passing static analysis
 
-&nbsp;&nbsp;&nbsp;&nbsp;<img src="pic1.tiff" width="400" height="200"><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<img src="pic1.png" width="400" height="200"><br/>
+
+```dart
+class Animal {
+  void chase(Animal a) { ... }
+  Animal get parent => ...
+}
+
+//success
+class HoneyBadger extends Animal {
+  @override
+  void chase(Animal a) { ... }
+
+  @override
+  HoneyBadger get parent => ...
+}
+
+// error -> Animal 타입에는 Root가 없음
+class HoneyBadger extends Animal {
+  @override
+  void chase(Animal a) { ... }
+  
+  @override
+  Root get parent => ...
+}
+```
+- subclass method 의 return type 은 super class 의 타입과 같거나 subtype 이여야한다!
+
+<br/>
+
+
+
 
 
 
