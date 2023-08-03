@@ -1074,6 +1074,188 @@ var (a, [b, c]) = ('str', [1, 2]);
 ```
 
 - 패턴 매칭은 지역변수 선언에서도 위와같이 활용할 수 있다.
+- 패턴이 "Matching" 할 때 "Destruct" 할 수 있다
+
+<br/>
+
+#### Switch statements and expressions
+
+```dart
+switch (obj) {
+  // Matches if 1 == obj.
+  case 1:
+    print('one');
+
+  // Matches if the value of obj is between the constant values of 'first' and 'last'.
+  case >= first && <= last:
+    print('in range');
+
+  // Matches if obj is a record with two fields, then assigns the fields to 'a' and 'b'.
+  case (var a, var b):
+    print('a = $a, b = $b');
+
+  default:
+}
+```
+
+- 결국 패턴은 조건이다
+- 이때 case로 나타내는 조건을 **switch statment**라 부르고 조건에 매칭되 destruct하는 부분은 **expresion**이라 부른다
+- 패턴은 refutable(거절가능)하다. 만약 case가 매칭되지 않는다면 다음 케이스로 넘어간다
+
+<br/>
+
+```dart
+Map<String, int> hist = {
+  'a': 23,
+  'b': 100,
+};
+
+for (var MapEntry(key: key, value: count) in hist.entries) {
+  print('$key occurred $count times');
+}
+```
+
+- 패턴을 이용해 for-in루프를 이용할 수 있다.
+- 예제와 같이 `var MapEntry(key: key, value: count)`와 `Map<String, int> hist`가 매칭됨에 따라 값을 하나씩 꺼내어 for-in루프를 돌릴 수 있다.
+
+<br/>
+
+#### Destructuring multiple returns
+
+```dart
+var info = userInfo(json);
+var name = info.$1;
+var age = info.$2;
+```
+- `Records` multiple value 들을 aggregate 하기도 하지만 returning 하기도 한다.
+
+<br/>
+
+#### Destructuring class instances
+
+```dart
+final Foo myFoo = Foo(one: 'one', two: 2);
+var Foo(:one, :two) = myFoo;
+print('one $one, two $two');
+```
+- 매칭만 된다면 위 예제와 같이 name type을 destruct하여 사용할 수 있다
+
+<br/>
+
+#### Validating incoming JSON
+
+~~~Dart
+var json = {
+  'user': ['Lily', 13]
+};
+var {'user': [name, age]} = json;
+~~~
+
+- Map과 list는 패턴을 적용하기에 아주 좋은 짝꿍이다.
+- 특히 key-value 쌍으로 되어있는 JSON data를 destruct 할 때 자주 이용한다
+
+
+<br/>
+
+```dart
+if (json is Map<String, Object?> &&
+    json.length == 1 &&
+    json.containsKey('user')) {
+  var user = json['user'];
+  if (user is List<Object> &&
+      user.length == 2 &&
+      user[0] is String &&
+      user[1] is int) {
+    var name = user[0] as String;
+    var age = user[1] as int;
+    print('User $name is $age years old.');
+  }
+}
+```
+- 패턴을 적용하지 않을시 코드가 이렇게 verbose 해진다.
+
+<br/>
+
+```dart
+if (json case {'user': [String name, int age]}) {
+  print('User $name is $age years old.');
+}
+```
+- case 패턴을 통해 위와 같은 예제를 크게 축약시킬 수 있다
+
+<br/>
+
+#
+
+### 12. Pattern types
+
+#### Logical-or
+
+```dart
+var isPrimary = switch (color) {
+  Color.red || Color.yellow || Color.blue => true,
+  _ => false
+};
+```
+- or 패턴은 ||로 표현하며 왼쪽에서부터 오른쪽으로 매칭해본다. 만약 false가 한번 나면 오른쪽은 더이상 보지않고 바로 false를 뱉어버린다.
+- 여기서도 예외없이 비교대상들의 타입이 매칭되어야한다
+
+<br/>
+
+#### Logical-and
+
+```dart
+switch ((1, 2)) {
+  // Error, both subpatterns attempt to bind 'b'.
+  case (var a, var b) && (var b, var c): // ...
+}
+```
+- and는 &&로 표현한다 or 패턴과 마찬가지로 false 가 나오면 오른쪽은 더이상 안보고 바로 false를 리턴한다
+
+<br/>
+
+#### Relational
+
+
+```dart
+String asciiCharType(int char) {
+  const space = 32;
+  const zero = 48;
+  const nine = 57;
+
+  return switch (char) {
+    < space => 'control',
+    == space => 'space',
+    > space && < zero => 'punctuation',
+    >= zero && <= nine => 'digit',
+    _ => ''
+  };
+}
+```
+- relational 패턴은 위와같이 and 패턴과 조합하면 유용하다
+
+<br/>
+
+#### Cast
+
+
+```dart
+(num, Object) record = (1, 's');
+var (i as int, s as String) = record;
+```
+- 패턴에 match하기전에 cast패턴은 먼저 타입캐스팅을 하는 패턴이다
+- 예제를 보면 먼저 record의 값을 타입캐스트하고 매칭하는 것을 확인할 수 있다
+
+<br/>
+
+#### Null-check
+
+```dart
+
+```
+
+
+<br/>
 
 
 
