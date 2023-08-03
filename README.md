@@ -975,10 +975,114 @@ Cat c = MaineCoon(); //success
 
 #### Generic type assignment
 
-&nbsp;&nbsp;&nbsp;&nbsp;<img src="1.png" width="400" height="200"><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<img src="pic/1.png" width="400" height="200"><br/>
 
 
-- 위와 같은 타입 계층구조에 따른 type safety 보장 방식은 제너릭 타입,
+~~~dart
+//success
+List<MaineCoon> myMaineCoons = ...
+List<Cat> myCats = myMaineCoons;
+
+//error
+List<Animal> myAnimals = ...
+List<Cat> myCats = myAnimals;
+~~~
+
+
+- 위와 같은 타입 계층구조에 따른 type safety 보장 방식은 제너릭 타입에도 동일하게 적용된다.
+- 하위타입인 Cat은 상위타입인 Animal을 할당받을 수 없다
+
+<br/>
+
+~~~dart
+List<Animal> myAnimals = ...
+List<Cat> myCats = myAnimals as List<Cat>;
+~~~~
+
+- 나는 곧죽어도 할당해야한다 싶으면 as를 통해 다운캐스팅을 해야한다
+
+<br/>
+
+```dart
+class Animal {
+    void chase(Animal a){}
+    Animal get parent => ...
+}
+```
+- get메서드에서도 똑같이 적용된다
+- 위의 코드의 경우 parent는 `chase(Animal)`를 가지고 읽기(read)를 하는데 이때 당연히 parent의 클래스가 더 상위여야 한다.
+
+<br/>
+
+#
+
+### 12. Patterns
+
+#### What patterns do
+
+~~~dart
+//Matching
+switch (number) {
+  // Constant pattern matches if 1 == number.
+  case 1:
+    print('one');
+}
+~~~~
+
+- 패턴의 예로는 할당연산자와 논리연산자 등이 있다. 즉 어떤 값이 특정 모양인지 비교해서 알아보는 체킹하는 행위와 같다.
+- Pattern은 value값을 context에 맞게 매칭(Match)하거나 분해(Destruct)하는 기능을 수행한다
+- Matching은 value가 패턴과 매칭하는지 알아보는 구문이다
+
+<br/>
+
+```dart
+const a = 'a';
+const b = 'b';
+switch (obj) {
+  // List pattern [a, b] matches obj first if obj is a list with two fields,
+  // then if its fields match the constant subpatterns 'a' and 'b'.
+  case [a, b]:
+    print('$a, $b');
+}
+```
+
+- 많은 패턴이 서브패턴을 사용한다 위 예제와 같이 먼저 Switch를 통해 case를 분류하고 또 case 내에서 a,b를 매칭시킨다.
+- 이를 outer and innter 패턴이라 부른다
+
+<br/>
+
+#### Destructuring
+
+```dart
+var numList = [1, 2, 3];
+// List pattern [a, b, c] destructures the three elements from numList...
+var [a, b, c] = numList;
+// ...and assigns them to new variables.
+print(a + b + c);
+```
+
+- 만약 객체의 패턴이 매칭한다면 객체의 데이터에 접근이 가능하다, 즉 객체의 데이터를 뽑아낼 수 있다.
+- 이렇게 패턴이 매칭된 객체의 데이터를 뽑아쓰는 것을 destruct한다고 부른다.
+
+<br/>
+
+#### Variable declaration
+
+```dart
+// Declares new variables a, b, and c.
+var (a, [b, c]) = ('str', [1, 2]);
+```
+
+- 패턴 매칭은 지역변수 선언에서도 위와같이 활용할 수 있다.
+
+
+
+
+
+
+
+
+
 
 
 
