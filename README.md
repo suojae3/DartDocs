@@ -893,25 +893,92 @@ class HoneyBadger extends Animal {
 
 <br/>
 
+#### Use sound parameter types when overriding methods
+
+- 상위클래스로부터 재정의(override)한 메서드의 타입은 상위클래스의 메서드 타입과 같거나 상위타입이여야 한다
+- 다시말해 재정의할 때는 반드시! 상위클래스 메서드의 타입을 포함시켜야한다는 의미이다. 아래 예제를 보자
+
+<br/>
+
+```dart
+//super class
+class Animal {
+  void chase(Animal a) { ... }
+  Animal get parent => ...
+}
+
+// sub class
+class HoneyBadger extends Animal {
+  @override
+  void chase(Object a) { ... } //상위클래스 메서드 파라미터 타입 Animal을 포괄한다
+
+  @override
+  Animal get parent => ...
+}
+
+//error 
+class Mouse extends Animal {...}
+
+class Cat extends Animal {
+  @override
+  void chase(Mouse x) { ... } //Animal타입보다 더 하위 타입으로 재정의할시 error
+}
+```
+- 상위클래스 `chase()`메서드 파라미터 타입이 `Animal`이기 때문에 재정의(override)할 경우 반드시 `Animal`을 포함시켜야 한다.  
+
+<br/>
+
+#### Don’t use a dynamic list as a typed list
+
+~~~dart
+class Cat extends Animal { ... }
+
+class Dog extends Animal { ... }
+
+void main() {
+  List<Cat> foo = <dynamic>[Dog()]; // Error
+  List<dynamic> bar = <dynamic>[Dog(), Cat()]; // OK
+}
+~~~
+
+- 배열(list)의 타입으로 다이나믹은 쓰지말 것!
+
+<br/>
+
+#### Type inference
+
+```Dart
+Map<String, dynamic> arguments = {'argA': 'hello', 'argB': 42};
+
+var arguments = {'argA': 'hello', 'argB': 42}; // Map<String, Object>
+```
+- argument의 타입은 사실상 `Map<String, dynamic>`이라고 볼 수 있다.
+- 단지 두 번째 코드를 작성해도 타입추론에 의해 첫번째 코드 타입으로 자동적으로 인식한다
+
+<br/>
+
+#### Substituting Types
+
+&nbsp;&nbsp;&nbsp;&nbsp;<img src="pic1.png" width="400" height="200"><br/>
+
+~~~dart
+Animal c = Cat();
+
+MaineCoon c = Cat(); //error
+Cat c = MaineCoon(); //success
+~~~
+
+- 하위 타입에 상위 타입을 할당하면 에러가 뜬다. 상위 타입에는 하위 타입에 속하지 않는 메서드나 속성이 있을 수 있기 때문에 type safety가 지켜지지 않기 때문이다
+- 반면 상위타입에 하위타입을 할당하는 것은 가능하다. 100%의 확률로 상위 타입은 하위타입의 메서드나 속성을 가질 수 있고 type safety가 지켜지기 때문이다
+
+<br/>
+
+#### Generic type assignment
+
+&nbsp;&nbsp;&nbsp;&nbsp;<img src="1.png" width="400" height="200"><br/>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- 위와 같은 타입 계층구조에 따른 type safety 보장 방식은 제너릭 타입,
 
 
 
